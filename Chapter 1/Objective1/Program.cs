@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objective1.Exercises;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,34 +10,15 @@ namespace Objective1
 {
     internal class Program
     {
+        private static TaskGanhadora _ganhadora = new TaskGanhadora();
+        private static Calculadora _calculadora = new Calculadora();
+
         public static void Main(string[] args)
         {
-            Task[] tasks = new Task[3];
-            tasks[0] = Task<int>.Run(() =>
-            {
-                Thread.Sleep(4000);
-                Console.WriteLine("1");
-                return 1;
-            });
-
-            tasks[1] = Task<int>.Run(() =>
-            {
-                Thread.Sleep(2000);
-                Console.WriteLine("2");
-                return 2;
-            });
-
-            tasks[2] = Task<int>.Run(() =>
-            {
-                Thread.Sleep(3000);
-                Console.WriteLine("3");
-                return 3;
-            });
-
-            Task.WaitAny(tasks);
-
-            Console.WriteLine($"Task ganhadora:  {tasks.Where(x => x.Status == TaskStatus.RanToCompletion).FirstOrDefault().Id}");
-
+            //_ganhadora.Run();
+            _calculadora.Iterations = 10;
+            _calculadora.Parallelize = true;
+            _calculadora.Run();
             Console.WriteLine("Pressione qualquer tecla para finalizar");
             Console.Read();
         }
